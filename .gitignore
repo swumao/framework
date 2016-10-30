@@ -1,0 +1,6 @@
+# IDE config file
+/.idea
+# vendor path
+/vendor
+
+
