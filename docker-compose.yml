@@ -1,0 +1,26 @@
+version: '2'
+services:
+  nginx:
+    build:
+      context: .
+      dockerfile:  ./nginx/Dockerfile
+    volumes_from:
+      - phpfpm
+    depends_on:
+      - phpfpm
+    ports:
+      - "80:80"
+  phpfpm:
+    build:
+      context: .
+      dockerfile:  ./phpfpm/Dockerfile
+    ports:
+     - "9000:9000"
+    volumes:
+     - .:/app
+    depends_on:
+     - mysql
+  mysql:
+    image: mysql
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
